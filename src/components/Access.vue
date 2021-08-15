@@ -3,7 +3,7 @@
   <button type="button" @click="count++">count up to: {{ count }}</button>
   <button type="button" @click="decreaseCount">count1 down to: {{ count1 }}</button>
   <button type="button" @click="increaseCount">count1 up to: {{ count1 }}</button>
-  <button type="button" @click="handleNextTimeTick">Tick to: {{ nextTimeToTick }}</button>
+  <!-- <button type="button" @click="handleNextTimeTick">Tick to: {{ nextTimeToTick }}</button> -->
   <div class="container">
     <div class="inner">
       <div class="game day"></div>
@@ -28,7 +28,7 @@
   </div>
   <input type="number" v-model="changeAmount" />
   <button @click="sumCountAmount">Add</button>
-  <audio preload="auto" :src="require('../assets/audio.mp3')"></audio>
+  <audio preload="auto" src="../assets/audio.mp3"></audio>
 </template>
 
 <script lang="ts">
