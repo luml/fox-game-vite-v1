@@ -26,18 +26,19 @@
       </div>
     </div>
   </div>
-  <input type="number" v-model="changeAmount">
+  <input type="number" v-model="changeAmount" />
   <button @click="sumCountAmount">Add</button>
+  <audio preload="auto" :src="require('../assets/audio.mp3')"></audio>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
-import { useCounter } from '../features/useCounter';
+import { ref, defineComponent } from "vue";
+import { useCounter } from "../features/useCounter";
 import gameState, { handleUserAction } from "./gameState";
 import { TICK_RATE } from "./constants";
 import initButtons from "./buttons";
 export default defineComponent({
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
     msg: {
       type: String,
@@ -45,26 +46,26 @@ export default defineComponent({
     }
   },
   setup: () => {
-    const nextTimeToTick = ref(0)
+    const nextTimeToTick = ref(0);
     // count, count1 are play data
-    const count = ref(5)
-    const {count1, decreaseCount, increaseCount} = useCounter()
-    const changeAmount = ref(30)
+    const count = ref(5);
+    const { count1, decreaseCount, increaseCount } = useCounter();
+    const changeAmount = ref(30);
     const sumCountAmount = () => {
-      count.value += changeAmount.value
-    }
-    return { 
+      count.value += changeAmount.value;
+    };
+    return {
       count,
       count1,
       decreaseCount,
       increaseCount,
       nextTimeToTick,
       changeAmount,
-      sumCountAmount,
-    }
+      sumCountAmount
+    };
   },
   created() {
-    this.nextTimeToTick = Date.now()
+    this.nextTimeToTick = Date.now();
   },
   mounted() {
     this.init();
@@ -85,7 +86,7 @@ export default defineComponent({
       requestAnimationFrame(this.nextAnimationFrame);
     }
   }
-})
+});
 </script>
 
 <style scoped>
@@ -104,15 +105,18 @@ code {
   border-radius: 4px;
   color: #304455;
 }
-button, input {
+button,
+input {
   background: lightcyan;
   border-radius: 0.3rem;
   padding: 0.2rem 0.5rem;
   margin: 0 0.1rem;
   color: darkgreen;
-  border: none  
+  border: none;
 }
-button:first-of-type, button:last-of-type, input {
+button:first-of-type,
+button:last-of-type,
+input {
   background: lightcoral;
   color: floralwhite;
 }
