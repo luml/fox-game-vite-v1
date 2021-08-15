@@ -28,7 +28,7 @@
   </div>
   <input type="number" v-model="changeAmount" />
   <button @click="sumCountAmount">Add</button>
-  <audio preload="auto" src="../assets/audio.mp3"></audio>
+  <audio preload="auto" src="../static/audio.mp3"></audio>
 </template>
 
 <script lang="ts">
