@@ -1,7 +1,9 @@
 <template>
   <h1>{{ msg }}</h1>
-  <button type="button" @click="count++">count is: {{ count }}</button>
-  <!-- <button type="button">Tick to: {{ nextTimeToTick }}</button> -->
+  <button type="button" @click="count++">count up to: {{ count }}</button>
+  <button type="button" @click="decreaseCount">count1 down to: {{ count1 }}</button>
+  <button type="button" @click="increaseCount">count1 up to: {{ count1 }}</button>
+  <button type="button" @click="handleNextTimeTick">Tick to: {{ nextTimeToTick }}</button>
   <div class="container">
     <div class="inner">
       <div class="game day"></div>
@@ -24,10 +26,13 @@
       </div>
     </div>
   </div>
+  <input type="number" v-model="changeAmount">
+  <button @click="sumCountAmount">Add</button>
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue'
+import { useCounter } from '../features/useCounter';
 import gameState, { handleUserAction } from "./gameState";
 import { TICK_RATE } from "./constants";
 import initButtons from "./buttons";
@@ -40,9 +45,23 @@ export default defineComponent({
     }
   },
   setup: () => {
-    const count = ref(0)
     const nextTimeToTick = ref(0)
-    return { count, nextTimeToTick }
+    // count, count1 are play data
+    const count = ref(5)
+    const {count1, decreaseCount, increaseCount} = useCounter()
+    const changeAmount = ref(30)
+    const sumCountAmount = () => {
+      count.value += changeAmount.value
+    }
+    return { 
+      count,
+      count1,
+      decreaseCount,
+      increaseCount,
+      nextTimeToTick,
+      changeAmount,
+      sumCountAmount,
+    }
   },
   created() {
     this.nextTimeToTick = Date.now()
@@ -84,6 +103,18 @@ code {
   padding: 2px 4px;
   border-radius: 4px;
   color: #304455;
+}
+button, input {
+  background: lightcyan;
+  border-radius: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  margin: 0 0.1rem;
+  color: darkgreen;
+  border: none  
+}
+button:first-of-type, button:last-of-type, input {
+  background: lightcoral;
+  color: floralwhite;
 }
 </style>
 <style>
