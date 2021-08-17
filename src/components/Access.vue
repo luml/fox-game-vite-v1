@@ -28,7 +28,7 @@
   </div>
   <input type="number" v-model="changeAmount" />
   <button @click="sumCountAmount">Add</button>
-  <audio preload="auto" src="/static/audio.mp3"></audio>
+  <audio id="gimee" autoplay :src="audioLink"></audio>
 </template>
 
 <script lang="ts">
@@ -37,6 +37,7 @@ import { useCounter } from "../features/useCounter";
 import gameState, { handleUserAction } from "./gameState";
 import { TICK_RATE } from "./constants";
 import initButtons from "./buttons";
+import audioLink from "../static/audio.mp3";
 export default defineComponent({
   name: "HelloWorld",
   props: {
@@ -64,10 +65,15 @@ export default defineComponent({
       sumCountAmount
     };
   },
+  data: () => ({
+    audioLink,
+  }),
   created() {
     this.nextTimeToTick = Date.now();
   },
   mounted() {
+    // either "autoplay" attribute nor play api is depends on user' browser plicy
+    // document.getElementById("gimee").play();
     this.init();
   },
   methods: {
